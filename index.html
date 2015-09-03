@@ -2,7 +2,7 @@
 <html>
 
 <head>
- <link rel="stylesheet" href="css/table.css" type="text/css" /> <!-- -->
+ <!--link rel="stylesheet" href="css/table.css" type="text/css" /> <!-- -->
  <style type="text/css">
    body { background-color: #EEEEEE;}
  </style>
@@ -16,12 +16,13 @@
 <!--place to load js -->
   <script type="text/javascript" src="inc/raphael-min.js"></script>
   <script type="text/javascript">
-   (function() {
+     (function() {
     var r = Raphael("data");
 
-    //draw first mountain
-    (function(){
-      var path = ['M20,156S40,120,62,90C62,90,70,101,80,108C80,108,90,115,98,121'  // main countour
+     //draw first mountain
+    var mountains = []; 
+    mountains.push((function(){
+      var path = ['M20,156S40,120,62,90C62,90,70,101,80,108C80,108,90,115,98,121L71,159'  // main countour
                , 'M55,100C55,100,60,105,65,100C65,100,64,102,71,101' // snow hat
                , 'M40,122S38,130C38,130,32,140,40,158'               // relief line 1
                , 'M64,101C64,102,55,122,65,159'                      // relief line 2
@@ -29,10 +30,10 @@
                , 'M0,155C0,155,20,156,40,158C40,158,65,160,71,159'  // relief line 4
                , 'M20,156z'
                ].join();
-       r.path(path);
-    })();
+       return r.path(path);
+    })());
     //draw second mountain
-    (function(){
+    mountains.push((function(){
       var path = ['M71,159C72,157,98,120,101,118C101,118,110,110,126,85C126,85,129,80,148,58'         // main countour(left part)
                 , 'C164,78,178,102,191,110C197,126,212,138,223,165'         // main countour(right part)
                 , 'M130,80C130,80,138,75,145,79C156,73,158,75,163,78'       // snow hat
@@ -43,21 +44,23 @@
                 , 'M223,165z'
                ].join();
                
-       r.path(path);
-    })();
+       return r.path(path);
+    })());
     //draw third mountain
-    (function(){
+    mountains.push((function(){
       var path = ['M209,139C208,140,219,132,229,124S229,124,236,118S240,114,250,124S260,136,264,146S268,154,270,162'         // main countour
                 , 'M230,124C230,124,234,128,238,125S238,125,241,126S241,126,250,124' // snow hat
                 , 'M219,132C219,132,224,138,228,142C228,142,225,151,220,158'      // relief line 1
                 , 'M234,126L244,138S238,149,236,164'     // relief line 2
                 , 'M260,136S264,147,260,155L255,163'        // relief line 3
                 , 'M223,165C223,165б236,165,223,162S270,162,290,162'        // relief line 4
-               //  */
                 , 'M209,139z'
                ].join();
-       r.path(path);
-    })(); 
+       return r.path(path);
+    })()); 
+    mountains[0].attr({fill: "white", stroke: "gray", "stroke-dasharray": "- ."});
+    mountains[1].attr({fill: "#CCC", stroke: "gray", "stroke-dasharray": "." });
+    mountains[2].attr({fill: "#DDD", stroke: "gray", "stroke-dasharray": "-"});
    })();
   </script>
 <!--end of js -->
